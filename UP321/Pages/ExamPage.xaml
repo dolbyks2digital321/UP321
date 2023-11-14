@@ -9,6 +9,10 @@
       Title="ExamPage">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
         <ListView x:Name="ExamList">
             <ListView.View>
                 <GridView>
@@ -23,5 +27,10 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="AddButt">Добавить</Button>
+            <Button x:Name="RedactButt">Редактировать</Button>
+            <Button x:Name="DeleteButt">Удалить</Button>
+        </StackPanel>
     </Grid>
 </Page>

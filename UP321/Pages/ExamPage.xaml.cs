@@ -24,6 +24,12 @@ namespace UP321.Pages
         {
             InitializeComponent();
             ExamList.ItemsSource = App.db.Exam.ToList();
+            if (App.Role == "st")
+            {
+                AddButt.Visibility = Visibility.Collapsed;
+                DeleteButt.Visibility = Visibility.Collapsed;
+                RedactButt.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

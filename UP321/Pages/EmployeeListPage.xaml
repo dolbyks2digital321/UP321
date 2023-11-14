@@ -29,9 +29,9 @@
             </ListView.View>
         </ListView>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-            <Button x:Name="AddBut">Добавить</Button>
-            <Button x:Name="RedactBut">Редактировать</Button>
-            <Button x:Name="DeletetBut">Удалить</Button>
+            <Button x:Name="AddButt">Добавить</Button>
+            <Button x:Name="RedactButt">Редактировать</Button>
+            <Button x:Name="DeletetButt">Удалить</Button>
         </StackPanel>
     </Grid>
 </Page>

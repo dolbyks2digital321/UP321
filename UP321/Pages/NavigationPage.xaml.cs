@@ -25,9 +25,8 @@ namespace UP321.Pages
             InitializeComponent();
             if (App.Role == "st")
             {
-                StudButt.Visibility = Visibility.Visible;
                 EmpButt.Visibility= Visibility.Collapsed;
-                ExamButt.Visibility = Visibility.Collapsed;
+                StudButt.Visibility = Visibility.Collapsed;
                 DiscButt.Visibility = Visibility.Collapsed;
             }
         }
