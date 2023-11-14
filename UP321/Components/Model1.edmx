@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UP321WPFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="UP321WPFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Degree">
           <Key>
             <PropertyRef Name="Id_degree" />
@@ -23,6 +23,7 @@
           <Property Name="Salary" Type="decimal" Precision="8" Scale="2" />
           <Property Name="Chief" Type="int" />
           <Property Name="Stage" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -82,6 +83,7 @@
           <Property Name="Id_Student" Type="int" Nullable="false" />
           <Property Name="Id_Spec" Type="nvarchar" MaxLength="8" />
           <Property Name="Surname_Student" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -91,6 +93,7 @@
           <Property Name="Cize_Subject" Type="int" />
           <Property Name="Name_Subject" Type="nvarchar" MaxLength="30" />
           <Property Name="Id_Lectern" Type="nvarchar" MaxLength="2" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -323,8 +326,7 @@
             <End Role="Subject" EntitySet="Subject" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UP321WPFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -352,6 +354,7 @@
           <NavigationProperty Name="Employee2" Relationship="Self.FK_Employee_To_Chief" FromRole="Employee1" ToRole="Employee" />
           <NavigationProperty Name="Lectern" Relationship="Self.FK_Employee_To_Lectern" FromRole="Employee" ToRole="Lectern" />
           <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_To_Employee" FromRole="Employee" ToRole="Exam" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -418,6 +421,7 @@
           <Property Name="Surname_Student" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_To_Student" FromRole="Student" ToRole="Exam" />
           <NavigationProperty Name="Specs" Relationship="Self.FK_Student_To_Spec" FromRole="Student" ToRole="Specs" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -430,6 +434,7 @@
           <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_To_Subject" FromRole="Subject" ToRole="Exam" />
           <NavigationProperty Name="Lectern" Relationship="Self.FK_Subject_To_Lectern" FromRole="Subject" ToRole="Lectern" />
           <NavigationProperty Name="Specs" Relationship="Self.Request" FromRole="Subject" ToRole="Specs" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -654,6 +659,7 @@
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="UP321WPFModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
                 <ScalarProperty Name="Id_Lectern" ColumnName="Id_Lectern" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -714,6 +720,7 @@
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="UP321WPFModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id_Student" ColumnName="Id_Student" />
                 <ScalarProperty Name="Id_Spec" ColumnName="Id_Spec" />
                 <ScalarProperty Name="Surname_Student" ColumnName="Surname_Student" />
@@ -723,6 +730,7 @@
           <EntitySetMapping Name="Subject">
             <EntityTypeMapping TypeName="UP321WPFModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id_Subject" ColumnName="Id_Subject" />
                 <ScalarProperty Name="Cize_Subject" ColumnName="Cize_Subject" />
                 <ScalarProperty Name="Name_Subject" ColumnName="Name_Subject" />

@@ -28,6 +28,7 @@ namespace UP321.Components
         public Nullable<decimal> Salary { get; set; }
         public Nullable<int> Chief { get; set; }
         public Nullable<int> Stage { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual Position Position { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,0 +1,37 @@
+﻿<Page x:Class="UP321.Pages.EmployeeListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UP321.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EmployeeListPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="EmpListView" Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Id_Employee}" Header="ID"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Id_Lectern}" Header="Кафедра"></GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Surname}" Header="ФИО"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Id_Position}" Header="Позиция"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Salary}" Header="З/П"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Chief}" Header="Начальник"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Stage}" Header="??"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="AddBut">Добавить</Button>
+            <Button x:Name="RedactBut">Редактировать</Button>
+            <Button x:Name="DeletetBut">Удалить</Button>
+        </StackPanel>
+    </Grid>
+</Page>

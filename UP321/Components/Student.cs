@@ -23,6 +23,7 @@ namespace UP321.Components
         public int Id_Student { get; set; }
         public string Id_Spec { get; set; }
         public string Surname_Student { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exam> Exam { get; set; }

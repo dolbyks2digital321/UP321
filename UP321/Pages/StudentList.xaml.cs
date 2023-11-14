@@ -12,27 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UP321.Pages;
 
-namespace UP321
+namespace UP321.Pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for StudentList.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StudentList : Page
     {
-        public MainWindow()
+        public StudentList()
         {
             InitializeComponent();
-            MainFrame.Navigate(new AuthorisationPage());
-        }
-
-        private void BackButt_Click(object sender, RoutedEventArgs e)
-        {
-            if (MainFrame.CanGoBack)
-            {
-                MainFrame.GoBack();
-            }
+            StudentsListView.Items.Clear();
+            StudentsListView.ItemsSource = App.db.Student.ToList();
         }
     }
 }

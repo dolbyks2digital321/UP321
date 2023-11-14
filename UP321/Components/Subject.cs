@@ -25,6 +25,7 @@ namespace UP321.Components
         public Nullable<int> Cize_Subject { get; set; }
         public string Name_Subject { get; set; }
         public string Id_Lectern { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Exam> Exam { get; set; }
