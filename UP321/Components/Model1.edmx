@@ -591,7 +591,7 @@
             <End Role="Subject" EntitySet="Subject" />
             <End Role="Exam" EntitySet="Exam" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Exam">
           <Key>
             <PropertyRef Name="Id_Exam" />
@@ -644,7 +644,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

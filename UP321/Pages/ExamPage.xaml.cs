@@ -52,7 +52,8 @@ namespace UP321.Pages
         private void RedactButt_Click(object sender, RoutedEventArgs e)
         {
             var exam = (Exam)ExamList.SelectedItem;
-            NavigationService.Navigate(new AddEditPage(exam));
+            if (exam == null) MessageBox.Show("Для редактирования выберите данные!");
+            else NavigationService.Navigate(new AddEditPage(exam));
         }
 
         private void AddButt_Click(object sender, RoutedEventArgs e)
