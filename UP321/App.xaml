@@ -17,6 +17,15 @@
 
         <Style TargetType="DatePicker">
             <Setter Property="Width" Value="150"></Setter>
+            <Setter Property="Height" Value="50"></Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="150"></Setter>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="150"></Setter>
         </Style>
     </Application.Resources>
 </Application>

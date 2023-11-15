@@ -51,7 +51,14 @@ namespace UP321.Pages
 
         private void RedactButt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddEditPage());
+            var exam = (Exam)ExamList.SelectedItem;
+            NavigationService.Navigate(new AddEditPage(exam));
+        }
+
+        private void AddButt_Click(object sender, RoutedEventArgs e)
+        {
+            var exam = new Exam();
+            NavigationService.Navigate(new AddEditPage(exam));
         }
     }
 }
