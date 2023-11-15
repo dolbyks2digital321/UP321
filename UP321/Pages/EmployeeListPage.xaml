@@ -20,9 +20,9 @@
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Id_Employee}" Header="ID"></GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Id_Lectern}" Header="Кафедра"></GridViewColumn>
                         <GridViewColumn Width="150" DisplayMemberBinding="{Binding Surname}" Header="ФИО"></GridViewColumn>
-                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Id_Position}" Header="Позиция"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Position.Position}" Header="Позиция"></GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Salary}" Header="З/П"></GridViewColumn>
-                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Chief}" Header="Начальник"></GridViewColumn>
+                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Employee.Surname}" Header="Начальник"></GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Stage}" Header="??"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
@@ -31,7 +31,7 @@
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
             <Button x:Name="AddButt">Добавить</Button>
             <Button x:Name="RedactButt">Редактировать</Button>
-            <Button x:Name="DeletetButt">Удалить</Button>
+            <Button x:Name="DeleteButt" Click="DeleteButt_Click">Удалить</Button>
         </StackPanel>
     </Grid>
 </Page>

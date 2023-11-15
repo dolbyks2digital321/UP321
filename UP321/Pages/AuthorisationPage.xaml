@@ -10,9 +10,7 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock>Введите пароль</TextBlock>
-            <TextBlock>111 - студент</TextBlock>
-            <TextBlock>222 - препод.</TextBlock>
+            <TextBlock Margin="5 5">Введите пароль</TextBlock>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock>Логин</TextBlock>

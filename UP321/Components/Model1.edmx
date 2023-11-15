@@ -36,6 +36,7 @@
           <Property Name="Id_Employee" Type="int" />
           <Property Name="Auditory" Type="nvarchar" MaxLength="10" />
           <Property Name="Mark" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -370,6 +371,7 @@
           <NavigationProperty Name="Employee" Relationship="Self.FK_Exam_To_Employee" FromRole="Exam" ToRole="Employee" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Exam_To_Student" FromRole="Exam" ToRole="Student" />
           <NavigationProperty Name="Subject" Relationship="Self.FK_Exam_To_Subject" FromRole="Exam" ToRole="Subject" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -673,6 +675,7 @@
           <EntitySetMapping Name="Exam">
             <EntityTypeMapping TypeName="UP321WPFModel.Exam">
               <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Date_Exam" ColumnName="Date_Exam" />
                 <ScalarProperty Name="Id_Subject" ColumnName="Id_Subject" />
                 <ScalarProperty Name="Id_Student" ColumnName="Id_Student" />

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UP321.Components;
 
 namespace UP321.Pages
 {
@@ -23,8 +24,20 @@ namespace UP321.Pages
         public EmployeeListPage()
         {
             InitializeComponent();
-            EmpListView.Items.Clear();
-            EmpListView.ItemsSource = App.db.Employee.ToList();
+            Refresh();
+        }
+
+        private void DeleteButt_Click(object sender, RoutedEventArgs e)
+        {
+            var emp = (Employee)EmpListView.SelectedItem;
+            emp.IsDeleted = Convert.ToBoolean(1);
+            Refresh();
+            App.db.SaveChanges();
+        }
+
+        public void Refresh()
+        {
+            EmpListView.ItemsSource = App.db.Employee.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1));
         }
     }
 }

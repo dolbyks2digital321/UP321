@@ -24,21 +24,37 @@ namespace UP321.Pages
         public AuthorisationPage()
         {
             InitializeComponent();
+            App.Role = "";
+            App.User = 0;
         }
 
         private void EntryButt_Click(object sender, RoutedEventArgs e)
         {
             var studentList = App.db.Student.ToList();
             var teacherList = App.db.Employee.ToList();
-            if (LoginTb.Text == "student" && !string.IsNullOrEmpty(studentList.Where(x => x.Id_Student == int.Parse(PasswordTb.Password)).ToString()))
+            if (LoginTb.Text == "student" && PasswordTb.Password != "")
             {
-                App.Role = "st";
-                NavigationService.Navigate(new NavigationPage());
+                var list = studentList.Where(x => x.Id_Student == int.Parse(PasswordTb.Password)).ToList();
+                if(list.Count() == 0)
+                { MessageBox.Show("Неправильный логин или пароль"); return; }
+                if (list.First().Id_Student == int.Parse(PasswordTb.Password))
+                {
+                    App.Role = "st";
+                    App.User = int.Parse(PasswordTb.Password);
+                    NavigationService.Navigate(new NavigationPage());
+                }
             }
-            else if (LoginTb.Text == "teacher" && !string.IsNullOrEmpty(teacherList.Where(x => x.Id_Employee == int.Parse(PasswordTb.Password)).ToString()))
+            else if (LoginTb.Text == "teacher" && PasswordTb.Password != "")
             {
-                App.Role = "tch";
-                NavigationService.Navigate(new NavigationPage());
+                var list = teacherList.Where(x => x.Id_Employee == int.Parse(PasswordTb.Password)).ToList();
+                if (list.Count() == 0)
+                { MessageBox.Show("Неправильный логин или пароль"); return; }
+                if (list.First().Id_Employee == int.Parse(PasswordTb.Password))
+                {
+                    App.Role = "tch";
+                    App.User = int.Parse(PasswordTb.Password);
+                    NavigationService.Navigate(new NavigationPage());
+                }
             }
             else MessageBox.Show("Неправильный логин или пароль");
         }

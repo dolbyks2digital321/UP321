@@ -16,5 +16,6 @@ namespace UP321
     {
         public static UP321WPFEntities db = new UP321WPFEntities();
         public static string Role = "";
+        public static int User = 0;
     }
 }
