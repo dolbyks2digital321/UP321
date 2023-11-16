@@ -20,10 +20,10 @@
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Id_Employee}" Header="ID"></GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Id_Lectern}" Header="Кафедра"></GridViewColumn>
                         <GridViewColumn Width="150" DisplayMemberBinding="{Binding Surname}" Header="ФИО"></GridViewColumn>
-                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Position.Position}" Header="Позиция"></GridViewColumn>
+                        <GridViewColumn Width="110" DisplayMemberBinding="{Binding Position.Position_Name}" Header="Позиция"></GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Salary}" Header="З/П"></GridViewColumn>
-                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Employee.Surname}" Header="Начальник"></GridViewColumn>
-                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Stage}" Header="??"></GridViewColumn>
+                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Employee2.Surname}" Header="Начальник"></GridViewColumn>
+                        <GridViewColumn Width="50" DisplayMemberBinding="{Binding Stage}" Header="Стаж"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>

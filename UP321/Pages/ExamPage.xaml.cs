@@ -53,13 +53,13 @@ namespace UP321.Pages
         {
             var exam = (Exam)ExamList.SelectedItem;
             if (exam == null) MessageBox.Show("Для редактирования выберите данные!");
-            else NavigationService.Navigate(new AddEditPage(exam));
+            else NavigationService.Navigate(new AddEditPageExam(exam));
         }
 
         private void AddButt_Click(object sender, RoutedEventArgs e)
         {
             var exam = new Exam();
-            NavigationService.Navigate(new AddEditPage(exam));
+            NavigationService.Navigate(new AddEditPageExam(exam));
         }
     }
 }

@@ -17,17 +17,17 @@ using UP321.Components;
 namespace UP321.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddEditPage.xaml
+    /// Логика взаимодействия для AddEditPageExam.xaml
     /// </summary>
-    public partial class AddEditPage : Page
+    public partial class AddEditPageExam : Page
     {
         public Exam exam;
-        public AddEditPage(Exam _exam)
+        public AddEditPageExam(Exam _exam)
         {
             InitializeComponent();
             exam = _exam;
             this.DataContext = exam;
-            if (exam.Date_Exam == null ) DatePck.SelectedDate = exam.DateExam;
+            if (exam.Date_Exam == null) DatePck.SelectedDate = exam.DateExam;
             DatePck.DisplayDateStart = new DateTime(2014, 01, 01);
 
             MarkTb.MaxLength = 1;
@@ -37,7 +37,7 @@ namespace UP321.Pages
 
             StudentCb.ItemsSource = App.db.Student.ToList();
             StudentCb.DisplayMemberPath = "Surname_Student";
-            
+
             TeacherCb.ItemsSource = App.db.Employee.ToList();
             TeacherCb.DisplayMemberPath = "Surname";
 
@@ -50,18 +50,27 @@ namespace UP321.Pages
                 var ccc = App.db.Employee.ToList().Where(x => x.Id_Employee == exam.Id_Employee).First();
                 TeacherCb.SelectedIndex = TeacherCb.Items.IndexOf(ccc);
             }
+            if (exam.Id_Exam == 0)
+            {
+                exam.Date_Exam = DateTime.Now;
+            }
         }
 
         private void SaveButt_Click(object sender, RoutedEventArgs e)
         {
             bool errors = false;
-            //if (string.IsNullOrEmpty(AuditoryTb.Text) || SubjectCb.SelectedIndex == 0 || StudentCb.SelectedIndex == 0 || TeacherCb.SelectedIndex == 0)
-            //{
-            //    MessageBox.Show("Заполните данные!");
-            //}
-            if (MarkTb.Text == "" || char.IsDigit(char.Parse(MarkTb.Text)))
+            var selectStudent = StudentCb.SelectedItem as Student;
+            var selectTeacher = TeacherCb.SelectedItem as Employee;
+            var selectSubject = SubjectCb.SelectedItem as Subject;
+            if (string.IsNullOrEmpty(AuditoryTb.Text) || selectStudent == null || selectTeacher == null || selectSubject == null)
             {
-                if (int.Parse(MarkTb.Text) > 5 || int.Parse(MarkTb.Text) < 1)
+                MessageBox.Show("Заполните данные!");
+                errors = true;
+            }
+            if ((MarkTb.Text == "" || char.IsDigit(char.Parse(MarkTb.Text))) && !errors)
+            {
+                if (int.Parse(MarkTb.Text) > 5 || int.Parse(MarkTb.Text)
+       < 1)
                 {
                     MessageBox.Show("Неправильный формат оценки!");
                     errors = true;
@@ -70,7 +79,7 @@ namespace UP321.Pages
             else
             { MessageBox.Show("Неправильный формат оценки!"); errors = true; }
 
-            if (exam.Id_Exam == 0)
+            if (exam.Id_Exam == 0 && !errors)
             {
                 if (App.db.Exam.Any(x => x.Date_Exam == exam.Date_Exam && x.Id_Student == exam.Id_Student && x.Id_Subject == exam.Id_Subject))
                 {
@@ -79,13 +88,24 @@ namespace UP321.Pages
                 }
                 else
                 {
-                    App.db.Exam.Add(exam);
+
+                    App.db.Exam.Add(new Exam()
+                    {
+                        Date_Exam = exam.Date_Exam,
+                        Id_Subject = selectSubject.Id_Subject,
+                        Id_Student = selectStudent.Id_Student,
+                        Id_Employee = selectTeacher.Id_Employee,
+                        Auditory = exam.Auditory,
+                        Mark = exam.Mark,
+                        IsDeleted = Convert.ToBoolean(0),
+                    });
                 }
             }
             if (!errors)
             {
                 App.db.SaveChanges();
                 MessageBox.Show("Сохранено!");
+                NavigationService.Navigate(new ExamPage());
             }
         }
     }

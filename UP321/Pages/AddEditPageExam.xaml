@@ -1,4 +1,4 @@
-﻿<Page x:Class="UP321.Pages.AddEditPage"
+﻿<Page x:Class="UP321.Pages.AddEditPageExam"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:UP321.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddEditPage">
+      Title="AddEditPageExam">
 
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -41,5 +41,6 @@
             </StackPanel>
             <Button x:Name="SaveButt" Margin="10" Click="SaveButt_Click">Сохранить</Button>
         </StackPanel>
+
     </Grid>
 </Page>

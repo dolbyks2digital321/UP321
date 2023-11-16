@@ -56,6 +56,18 @@ namespace UP321.Pages
                     NavigationService.Navigate(new NavigationPage());
                 }
             }
+            else if (LoginTb.Text == "admin" && PasswordTb.Password != "")
+            {
+                var list = teacherList.Where(x => x.Chief == x.Id_Employee && x.Id_Employee == int.Parse(PasswordTb.Password)).ToList();
+                if (list.Count() == 0)
+                { MessageBox.Show("Неправильный логин или пароль"); return; }
+                if (list.First().Id_Employee == int.Parse(PasswordTb.Password))
+                {
+                    App.Role = "adm";
+                    App.User = int.Parse(PasswordTb.Password);
+                    NavigationService.Navigate(new NavigationPage());
+                }
+            }
             else MessageBox.Show("Неправильный логин или пароль");
         }
     }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="UP321WPFModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище UP321WPFModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Degree">
           <Key>
             <PropertyRef Name="Id_degree" />
@@ -58,7 +58,7 @@
             <PropertyRef Name="Id_Position" />
           </Key>
           <Property Name="Id_Position" Type="int" Nullable="false" />
-          <Property Name="Position" Type="nvarchar(max)" />
+          <Property Name="Position_Name" Type="nvarchar(max)" />
           <Property Name="Id_Degree" Type="int" />
         </EntityType>
         <EntityType Name="Request">
@@ -262,7 +262,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UP321WPFModelStoreContainer">
+        <EntityContainer Name="Хранилище UP321WPFModelContainer">
           <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Exam" EntityType="Self.Exam" Schema="dbo" store:Type="Tables" />
@@ -327,7 +327,8 @@
             <End Role="Subject" EntitySet="Subject" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="UP321WPFModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -350,12 +351,28 @@
           <Property Name="Salary" Type="Decimal" Precision="8" Scale="2" />
           <Property Name="Chief" Type="Int32" />
           <Property Name="Stage" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="Position" Relationship="Self.FK_Employee_Position" FromRole="Employee" ToRole="Position" />
           <NavigationProperty Name="Employee1" Relationship="Self.FK_Employee_To_Chief" FromRole="Employee" ToRole="Employee1" />
           <NavigationProperty Name="Employee2" Relationship="Self.FK_Employee_To_Chief" FromRole="Employee1" ToRole="Employee" />
           <NavigationProperty Name="Lectern" Relationship="Self.FK_Employee_To_Lectern" FromRole="Employee" ToRole="Lectern" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_To_Employee" FromRole="Employee" ToRole="Exam" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="Id_Exam" />
+          </Key>
+          <Property Name="Date_Exam" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Id_Subject" Type="Int32" />
+          <Property Name="Id_Student" Type="Int32" Nullable="false" />
+          <Property Name="Id_Employee" Type="Int32" />
+          <Property Name="Auditory" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Mark" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Exam" Relationship="UP321WPFModel.FK_Exam_To_Employee" FromRole="Employee" ToRole="Exam" />
+          <Property Name="Id_Exam" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Exam_To_Employee" FromRole="Exam" ToRole="Employee" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Exam_To_Student" FromRole="Exam" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Exam_To_Subject" FromRole="Exam" ToRole="Subject" />
         </EntityType>
         <EntityType Name="Faculty">
           <Key>
@@ -382,7 +399,7 @@
             <PropertyRef Name="Id_Position" />
           </Key>
           <Property Name="Id_Position" Type="Int32" Nullable="false" />
-          <Property Name="Position1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Id_Degree" Type="Int32" />
           <NavigationProperty Name="Degree" Relationship="Self.FK_Position_Degree" FromRole="Position" ToRole="Degree" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Position" FromRole="Position" ToRole="Employee" />
@@ -405,9 +422,9 @@
           <Property Name="Id_Student" Type="Int32" Nullable="false" />
           <Property Name="Id_Spec" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
           <Property Name="Surname_Student" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Specs" Relationship="Self.FK_Student_To_Spec" FromRole="Student" ToRole="Specs" />
           <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Exam" Relationship="UP321WPFModel.FK_Exam_To_Student" FromRole="Student" ToRole="Exam" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_To_Student" FromRole="Student" ToRole="Exam" />
+          <NavigationProperty Name="Specs" Relationship="Self.FK_Student_To_Spec" FromRole="Student" ToRole="Specs" />
         </EntityType>
         <EntityType Name="Subject">
           <Key>
@@ -417,10 +434,10 @@
           <Property Name="Cize_Subject" Type="Int32" />
           <Property Name="Name_Subject" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Id_Lectern" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Exam" Relationship="Self.FK_Exam_To_Subject" FromRole="Subject" ToRole="Exam" />
           <NavigationProperty Name="Lectern" Relationship="Self.FK_Subject_To_Lectern" FromRole="Subject" ToRole="Lectern" />
           <NavigationProperty Name="Specs" Relationship="Self.Request" FromRole="Subject" ToRole="Specs" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <NavigationProperty Name="Exam" Relationship="UP321WPFModel.FK_Exam_To_Subject" FromRole="Subject" ToRole="Exam" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -480,6 +497,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Exam_To_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id_Employee" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Id_Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exam_To_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="Id_Student" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Id_Student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exam_To_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1" />
+          <End Role="Exam" Type="Self.Exam" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="Id_Subject" />
+            </Principal>
+            <Dependent Role="Exam">
+              <PropertyRef Name="Id_Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Lectern_To_Faculty">
           <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
           <End Role="Lectern" Type="Self.Lectern" Multiplicity="*" />
@@ -535,6 +588,7 @@
         <EntityContainer Name="UP321WPFEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Degree" EntityType="Self.Degree" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="Exam" EntityType="Self.Exam" />
           <EntitySet Name="Faculty" EntityType="Self.Faculty" />
           <EntitySet Name="Lectern" EntityType="Self.Lectern" />
           <EntitySet Name="Position" EntityType="Self.Position" />
@@ -558,6 +612,18 @@
             <End Role="Lectern" EntitySet="Lectern" />
             <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
+          <AssociationSet Name="FK_Exam_To_Employee" Association="Self.FK_Exam_To_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exam_To_Student" Association="Self.FK_Exam_To_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exam_To_Subject" Association="Self.FK_Exam_To_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Exam" EntitySet="Exam" />
+          </AssociationSet>
           <AssociationSet Name="FK_Lectern_To_Faculty" Association="Self.FK_Lectern_To_Faculty">
             <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Lectern" EntitySet="Lectern" />
@@ -578,78 +644,13 @@
             <End Role="Specs" EntitySet="Specs" />
             <End Role="Subject" EntitySet="Subject" />
           </AssociationSet>
-          <EntitySet Name="Exam" EntityType="UP321WPFModel.Exam" />
-          <AssociationSet Name="FK_Exam_To_Employee" Association="UP321WPFModel.FK_Exam_To_Employee">
-            <End Role="Employee" EntitySet="Employee" />
-            <End Role="Exam" EntitySet="Exam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Exam_To_Student" Association="UP321WPFModel.FK_Exam_To_Student">
-            <End Role="Student" EntitySet="Student" />
-            <End Role="Exam" EntitySet="Exam" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Exam_To_Subject" Association="UP321WPFModel.FK_Exam_To_Subject">
-            <End Role="Subject" EntitySet="Subject" />
-            <End Role="Exam" EntitySet="Exam" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="Exam">
-          <Key>
-            <PropertyRef Name="Id_Exam" />
-          </Key>
-          <Property Name="Date_Exam" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Id_Subject" Type="Int32" />
-          <Property Name="Id_Student" Type="Int32" Nullable="false" />
-          <Property Name="Id_Employee" Type="Int32" />
-          <Property Name="Auditory" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="Mark" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" />
-          <Property Name="Id_Exam" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Employee" Relationship="UP321WPFModel.FK_Exam_To_Employee" FromRole="Exam" ToRole="Employee" />
-          <NavigationProperty Name="Student" Relationship="UP321WPFModel.FK_Exam_To_Student" FromRole="Exam" ToRole="Student" />
-          <NavigationProperty Name="Subject" Relationship="UP321WPFModel.FK_Exam_To_Subject" FromRole="Exam" ToRole="Subject" />
-        </EntityType>
-        <Association Name="FK_Exam_To_Employee">
-          <End Type="UP321WPFModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="UP321WPFModel.Exam" Role="Exam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="Id_Employee" />
-            </Principal>
-            <Dependent Role="Exam">
-              <PropertyRef Name="Id_Employee" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Exam_To_Student">
-          <End Type="UP321WPFModel.Student" Role="Student" Multiplicity="1" />
-          <End Type="UP321WPFModel.Exam" Role="Exam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="Id_Student" />
-            </Principal>
-            <Dependent Role="Exam">
-              <PropertyRef Name="Id_Student" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Exam_To_Subject">
-          <End Type="UP321WPFModel.Subject" Role="Subject" Multiplicity="0..1" />
-          <End Type="UP321WPFModel.Exam" Role="Exam" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Subject">
-              <PropertyRef Name="Id_Subject" />
-            </Principal>
-            <Dependent Role="Exam">
-              <PropertyRef Name="Id_Subject" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        </Schema>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UP321WPFModelStoreContainer" CdmEntityContainer="UP321WPFEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UP321WPFModelContainer" CdmEntityContainer="UP321WPFEntities">
           <EntitySetMapping Name="Degree">
             <EntityTypeMapping TypeName="UP321WPFModel.Degree">
               <MappingFragment StoreEntitySet="Degree">
@@ -661,7 +662,6 @@
           <EntitySetMapping Name="Employee">
             <EntityTypeMapping TypeName="UP321WPFModel.Employee">
               <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
                 <ScalarProperty Name="Id_Lectern" ColumnName="Id_Lectern" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -669,6 +669,21 @@
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="Chief" ColumnName="Chief" />
                 <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exam">
+            <EntityTypeMapping TypeName="UP321WPFModel.Exam">
+              <MappingFragment StoreEntitySet="Exam">
+                <ScalarProperty Name="Date_Exam" ColumnName="Date_Exam" />
+                <ScalarProperty Name="Id_Subject" ColumnName="Id_Subject" />
+                <ScalarProperty Name="Id_Student" ColumnName="Id_Student" />
+                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
+                <ScalarProperty Name="Auditory" ColumnName="Auditory" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Id_Exam" ColumnName="Id_Exam" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -693,7 +708,7 @@
             <EntityTypeMapping TypeName="UP321WPFModel.Position">
               <MappingFragment StoreEntitySet="Position">
                 <ScalarProperty Name="Id_Position" ColumnName="Id_Position" />
-                <ScalarProperty Name="Position1" ColumnName="Position" />
+                <ScalarProperty Name="Position_Name" ColumnName="Position_Name" />
                 <ScalarProperty Name="Id_Degree" ColumnName="Id_Degree" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -710,21 +725,21 @@
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="UP321WPFModel.Student">
               <MappingFragment StoreEntitySet="Student">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id_Student" ColumnName="Id_Student" />
                 <ScalarProperty Name="Id_Spec" ColumnName="Id_Spec" />
                 <ScalarProperty Name="Surname_Student" ColumnName="Surname_Student" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Subject">
             <EntityTypeMapping TypeName="UP321WPFModel.Subject">
               <MappingFragment StoreEntitySet="Subject">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id_Subject" ColumnName="Id_Subject" />
                 <ScalarProperty Name="Cize_Subject" ColumnName="Cize_Subject" />
                 <ScalarProperty Name="Name_Subject" ColumnName="Name_Subject" />
                 <ScalarProperty Name="Id_Lectern" ColumnName="Id_Lectern" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -747,20 +762,6 @@
               <ScalarProperty Name="Id_Subject" ColumnName="Id_Subject" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Exam">
-            <EntityTypeMapping TypeName="UP321WPFModel.Exam">
-              <MappingFragment StoreEntitySet="Exam">
-                <ScalarProperty Name="Id_Exam" ColumnName="Id_Exam" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Mark" ColumnName="Mark" />
-                <ScalarProperty Name="Auditory" ColumnName="Auditory" />
-                <ScalarProperty Name="Id_Employee" ColumnName="Id_Employee" />
-                <ScalarProperty Name="Id_Student" ColumnName="Id_Student" />
-                <ScalarProperty Name="Id_Subject" ColumnName="Id_Subject" />
-                <ScalarProperty Name="Date_Exam" ColumnName="Date_Exam" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -778,7 +779,7 @@
         <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

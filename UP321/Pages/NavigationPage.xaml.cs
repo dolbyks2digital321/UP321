@@ -29,6 +29,8 @@ namespace UP321.Pages
                 StudButt.Visibility = Visibility.Collapsed;
                 DiscButt.Visibility = Visibility.Collapsed;
             }
+
+            if (App.Role == "tch") EmpButt.Visibility= Visibility.Collapsed;
         }
 
         private void StudButt_Click(object sender, RoutedEventArgs e)
