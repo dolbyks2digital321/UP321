@@ -12,7 +12,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="StudButt" Click="StudButt_Click">Список студентов</Button>
             <Button x:Name="EmpButt" Click="EmpButt_Click">Список сотрудников</Button>
-            <Button x:Name="DiscButt">Список дисциплин</Button>
+            <Button x:Name="DiscButt" Click="DiscButt_Click">Список дисциплин</Button>
             <Button x:Name="ExamButt" Click="ExamButt_Click">Список экзаменов</Button>
         </StackPanel>
     </Grid>

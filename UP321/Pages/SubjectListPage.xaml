@@ -9,6 +9,25 @@
       Title="SubjectListPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="38*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="SubjectList" Grid.Row="0">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Название" Width="200" DisplayMemberBinding="{Binding Name_Subject}"></GridViewColumn>
+                        <GridViewColumn Header="Объём часов" Width="100" DisplayMemberBinding="{Binding Cize_Subject}"></GridViewColumn>
+                        <GridViewColumn Header="Кафедра" Width="250" DisplayMemberBinding="{Binding Lectern.Name_Lectern}"></GridViewColumn>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+            <Button x:Name="AddButt">Добавить</Button>
+            <Button x:Name="RedactButt">Редактировать</Button>
+            <Button x:Name="DeleteButt" Click="DeleteButt_Click">Удалить</Button>
+        </StackPanel>
     </Grid>
 </Page>

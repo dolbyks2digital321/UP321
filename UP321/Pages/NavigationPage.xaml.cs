@@ -47,5 +47,10 @@ namespace UP321.Pages
         {
             NavigationService.Navigate(new EmployeeListPage());
         }
+
+        private void DiscButt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new SubjectListPage());
+        }
     }
 }

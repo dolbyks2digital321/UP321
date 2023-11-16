@@ -24,6 +24,7 @@
           <Property Name="Chief" Type="int" />
           <Property Name="Stage" Type="int" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Id_degree" Type="int" />
         </EntityType>
         <EntityType Name="Exam">
           <Key>
@@ -59,7 +60,6 @@
           </Key>
           <Property Name="Id_Position" Type="int" Nullable="false" />
           <Property Name="Position_Name" Type="nvarchar(max)" />
-          <Property Name="Id_Degree" Type="int" />
         </EntityType>
         <EntityType Name="Request">
           <Key>
@@ -106,6 +106,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Employee_Degree">
+          <End Role="Degree" Type="Self.Degree" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree">
+              <PropertyRef Name="Id_degree" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id_degree" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_Position">
           <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -190,18 +202,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Position_Degree">
-          <End Role="Degree" Type="Self.Degree" Multiplicity="0..1" />
-          <End Role="Position" Type="Self.Position" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Degree">
-              <PropertyRef Name="Id_degree" />
-            </Principal>
-            <Dependent Role="Position">
-              <PropertyRef Name="Id_Degree" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Request_To_Spec">
           <End Role="Specs" Type="Self.Specs" Multiplicity="1" />
           <End Role="Request" Type="Self.Request" Multiplicity="*" />
@@ -274,6 +274,10 @@
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Degree" Association="Self.FK_Employee_Degree">
+            <End Role="Degree" EntitySet="Degree" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employee_Position" Association="Self.FK_Employee_Position">
             <End Role="Position" EntitySet="Position" />
             <End Role="Employee" EntitySet="Employee" />
@@ -301,10 +305,6 @@
           <AssociationSet Name="FK_Lectern_To_Faculty" Association="Self.FK_Lectern_To_Faculty">
             <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Lectern" EntitySet="Lectern" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Position_Degree" Association="Self.FK_Position_Degree">
-            <End Role="Degree" EntitySet="Degree" />
-            <End Role="Position" EntitySet="Position" />
           </AssociationSet>
           <AssociationSet Name="FK_Request_To_Spec" Association="Self.FK_Request_To_Spec">
             <End Role="Specs" EntitySet="Specs" />
@@ -338,7 +338,7 @@
           </Key>
           <Property Name="Id_degree" Type="Int32" Nullable="false" />
           <Property Name="Degree1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Position" Relationship="Self.FK_Position_Degree" FromRole="Degree" ToRole="Position" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Degree" FromRole="Degree" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -352,6 +352,8 @@
           <Property Name="Chief" Type="Int32" />
           <Property Name="Stage" Type="Int32" />
           <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Id_degree" Type="Int32" />
+          <NavigationProperty Name="Degree" Relationship="Self.FK_Employee_Degree" FromRole="Employee" ToRole="Degree" />
           <NavigationProperty Name="Position" Relationship="Self.FK_Employee_Position" FromRole="Employee" ToRole="Position" />
           <NavigationProperty Name="Employee1" Relationship="Self.FK_Employee_To_Chief" FromRole="Employee" ToRole="Employee1" />
           <NavigationProperty Name="Employee2" Relationship="Self.FK_Employee_To_Chief" FromRole="Employee1" ToRole="Employee" />
@@ -400,8 +402,6 @@
           </Key>
           <Property Name="Id_Position" Type="Int32" Nullable="false" />
           <Property Name="Position_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Id_Degree" Type="Int32" />
-          <NavigationProperty Name="Degree" Relationship="Self.FK_Position_Degree" FromRole="Position" ToRole="Degree" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Position" FromRole="Position" ToRole="Employee" />
         </EntityType>
         <EntityType Name="Specs">
@@ -449,15 +449,15 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <Association Name="FK_Position_Degree">
+        <Association Name="FK_Employee_Degree">
           <End Role="Degree" Type="Self.Degree" Multiplicity="0..1" />
-          <End Role="Position" Type="Self.Position" Multiplicity="*" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Degree">
               <PropertyRef Name="Id_degree" />
             </Principal>
-            <Dependent Role="Position">
-              <PropertyRef Name="Id_Degree" />
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id_degree" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -596,9 +596,9 @@
           <EntitySet Name="Student" EntityType="Self.Student" />
           <EntitySet Name="Subject" EntityType="Self.Subject" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <AssociationSet Name="FK_Position_Degree" Association="Self.FK_Position_Degree">
+          <AssociationSet Name="FK_Employee_Degree" Association="Self.FK_Employee_Degree">
             <End Role="Degree" EntitySet="Degree" />
-            <End Role="Position" EntitySet="Position" />
+            <End Role="Employee" EntitySet="Employee" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_Position" Association="Self.FK_Employee_Position">
             <End Role="Position" EntitySet="Position" />
@@ -670,6 +670,7 @@
                 <ScalarProperty Name="Chief" ColumnName="Chief" />
                 <ScalarProperty Name="Stage" ColumnName="Stage" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Id_degree" ColumnName="Id_degree" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -709,7 +710,6 @@
               <MappingFragment StoreEntitySet="Position">
                 <ScalarProperty Name="Id_Position" ColumnName="Id_Position" />
                 <ScalarProperty Name="Position_Name" ColumnName="Position_Name" />
-                <ScalarProperty Name="Id_Degree" ColumnName="Id_Degree" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -25,8 +25,7 @@ namespace UP321.Pages
         public StudentList()
         {
             InitializeComponent();
-            StudentsListView.Items.Clear();
-            StudentsListView.ItemsSource = App.db.Student.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1));
+            Refresh();
         }
 
         private void DeleteButt_Click(object sender, RoutedEventArgs e)

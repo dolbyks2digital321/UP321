@@ -18,19 +18,20 @@
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Id_Employee}" Header="ID"></GridViewColumn>
-                        <GridViewColumn Width="100" DisplayMemberBinding="{Binding Id_Lectern}" Header="Кафедра"></GridViewColumn>
-                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Surname}" Header="ФИО"></GridViewColumn>
+                        <GridViewColumn Width="80" DisplayMemberBinding="{Binding Id_Lectern}" Header="Кафедра"></GridViewColumn>
+                        <GridViewColumn Width="140" DisplayMemberBinding="{Binding Surname}" Header="ФИО"></GridViewColumn>
                         <GridViewColumn Width="110" DisplayMemberBinding="{Binding Position.Position_Name}" Header="Позиция"></GridViewColumn>
                         <GridViewColumn Width="100" DisplayMemberBinding="{Binding Salary}" Header="З/П"></GridViewColumn>
-                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Employee2.Surname}" Header="Начальник"></GridViewColumn>
+                        <GridViewColumn Width="130" DisplayMemberBinding="{Binding Employee2.Surname}" Header="Начальник"></GridViewColumn>
                         <GridViewColumn Width="50" DisplayMemberBinding="{Binding Stage}" Header="Стаж"></GridViewColumn>
+                        <GridViewColumn Width="95" DisplayMemberBinding="{Binding Degree.Degree1}" Header="Степень"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-            <Button x:Name="AddButt">Добавить</Button>
-            <Button x:Name="RedactButt">Редактировать</Button>
+            <Button x:Name="AddButt" Click="AddButt_Click">Добавить</Button>
+            <Button x:Name="RedactButt" Click="RedactButt_Click">Редактировать</Button>
             <Button x:Name="DeleteButt" Click="DeleteButt_Click">Удалить</Button>
         </StackPanel>
     </Grid>

@@ -22,9 +22,7 @@ namespace UP321.Components
     
         public int Id_Position { get; set; }
         public string Position_Name { get; set; }
-        public Nullable<int> Id_Degree { get; set; }
     
-        public virtual Degree Degree { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employee { get; set; }
     }

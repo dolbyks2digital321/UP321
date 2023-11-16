@@ -17,13 +17,13 @@ namespace UP321.Components
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Degree()
         {
-            this.Position = new HashSet<Position>();
+            this.Employee = new HashSet<Employee>();
         }
     
         public int Id_degree { get; set; }
         public string Degree1 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Position> Position { get; set; }
+        public virtual ICollection<Employee> Employee { get; set; }
     }
 }

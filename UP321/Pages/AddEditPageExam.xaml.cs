@@ -27,7 +27,6 @@ namespace UP321.Pages
             InitializeComponent();
             exam = _exam;
             this.DataContext = exam;
-            if (exam.Date_Exam == null) DatePck.SelectedDate = exam.DateExam;
             DatePck.DisplayDateStart = new DateTime(2014, 01, 01);
 
             MarkTb.MaxLength = 1;

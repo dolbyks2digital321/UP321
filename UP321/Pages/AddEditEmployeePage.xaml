@@ -9,6 +9,36 @@
       Title="AddEditEmployeePage">
 
     <Grid>
-        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>ID</TextBlock>
+                <TextBox Text="{Binding Id_Employee}" x:Name="IdTb" Margin="10 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>Кафедра</TextBlock>
+                <ComboBox x:Name="LecternCbx" Margin="10 0"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>ФИО</TextBlock>
+                <TextBox Text="{Binding Surname}" x:Name="FioTb" Margin="10 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>Позиция</TextBlock>
+                <ComboBox x:Name="PositionCbx" Margin="10 0"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>З/П</TextBlock>
+                <TextBox Text="{Binding Salary}" x:Name="SalaryTb" Margin="10 0"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>Начальник</TextBlock>
+                <ComboBox x:Name="ChiefCbx" Margin="10 0"></ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0 10" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock>Стаж</TextBlock>
+                <TextBox Text="{Binding Stage}" x:Name="StageTb" Margin="10 0"></TextBox>
+            </StackPanel>
+            <Button x:Name="SaveButt" Margin="10" Click="SaveButt_Click">Сохранить</Button>
+        </StackPanel>
     </Grid>
 </Page>

@@ -39,5 +39,17 @@ namespace UP321.Pages
         {
             EmpListView.ItemsSource = App.db.Employee.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1));
         }
+
+        private void AddButt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditEmployeePage(new Employee()));
+        }
+
+        private void RedactButt_Click(object sender, RoutedEventArgs e)
+        {
+            var emp = (Employee)EmpListView.SelectedItem;
+            if (emp == null) MessageBox.Show("Для редактирования выберите данные!");
+            else NavigationService.Navigate(new AddEditEmployeePage(emp));
+        }
     }
 }
