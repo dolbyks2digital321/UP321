@@ -23,33 +23,25 @@ namespace UP321.Pages
     {
         public EmployeeListPage()
         {
-            InitializeComponent();
-            Refresh();
+            InitializeComponent(); Refresh();
         }
-
         private void DeleteButt_Click(object sender, RoutedEventArgs e)
         {
-            var emp = (Employee)EmpListView.SelectedItem;
-            emp.IsDeleted = Convert.ToBoolean(1);
-            Refresh();
-            App.db.SaveChanges();
+            var emp = (Employee)EmpListView.SelectedItem; emp.IsDeleted = Convert.ToBoolean(1);
+            Refresh(); App.db.SaveChanges();
         }
-
         public void Refresh()
         {
             EmpListView.ItemsSource = App.db.Employee.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1));
         }
-
         private void AddButt_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new AddEditEmployeePage(new Employee()));
+            NavigationService.Navigate(new AddEditEmployeePage(new Employee(), "add"));
         }
-
         private void RedactButt_Click(object sender, RoutedEventArgs e)
         {
-            var emp = (Employee)EmpListView.SelectedItem;
-            if (emp == null) MessageBox.Show("Для редактирования выберите данные!");
-            else NavigationService.Navigate(new AddEditEmployeePage(emp));
+            var emp = (Employee)EmpListView.SelectedItem; if (emp == null) MessageBox.Show("Для редактирования выберите данные!");
+            else NavigationService.Navigate(new AddEditEmployeePage(emp, "redact"));
         }
     }
 }

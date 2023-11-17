@@ -10,10 +10,38 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="187*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="167*"/>
             <RowDefinition Height="38*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="ExamList">
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin="5 0" VerticalAlignment="Center">
+                <TextBlock Margin="5 0">По дате</TextBlock>
+                <ComboBox x:Name="SortCB" Width="130" SelectionChanged="SortCB_SelectionChanged">
+                    <ComboBoxItem>По умолчанию</ComboBoxItem>
+                    <ComboBoxItem>Позже</ComboBoxItem>
+                    <ComboBoxItem>Раньше</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5 0" VerticalAlignment="Center">
+                <TextBlock Margin="5 0">По оценке</TextBlock>
+                <ComboBox x:Name="MarkSortCB" Width="50"  SelectionChanged="MarkSortCB_SelectionChanged">
+                    <ComboBoxItem>Все</ComboBoxItem>
+                    <ComboBoxItem>5</ComboBoxItem>
+                    <ComboBoxItem>4</ComboBoxItem>
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>2</ComboBoxItem>
+                    <ComboBoxItem>1</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center" Margin="5 0">Поиск</TextBlock>
+                <TextBox x:Name="SearchTbx" TextChanged="SearchTbx_TextChanged" Width="200" Height="30"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView x:Name="ExamList" Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
@@ -27,7 +55,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
             <Button x:Name="AddButt" Click="AddButt_Click">Добавить</Button>
             <Button x:Name="RedactButt" Click="RedactButt_Click">Редактировать</Button>
             <Button x:Name="DeleteButt" Click="DeleteButt_Click">Удалить</Button>

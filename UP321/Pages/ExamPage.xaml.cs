@@ -43,10 +43,29 @@ namespace UP321.Pages
 
         public void Refresh()
         {
+            IEnumerable<Exam> examsort = App.db.Exam;
+            if (SortCB.SelectedIndex == 1) examsort = examsort.OrderByDescending(x => x.Date_Exam);
+            if (SortCB.SelectedIndex == 2) examsort = examsort.OrderBy(x => x.Date_Exam);
+
+            if (MarkSortCB.SelectedIndex != 0)
+            {
+                if (MarkSortCB.SelectedIndex == 1) examsort = examsort.Where(x => x.Mark == 5);
+                else if (MarkSortCB.SelectedIndex == 2) examsort = examsort.Where(x => x.Mark == 4);
+                else if (MarkSortCB.SelectedIndex == 3) examsort = examsort.Where(x => x.Mark == 3);
+                else if (MarkSortCB.SelectedIndex == 4) examsort = examsort.Where(x => x.Mark == 2);
+                else if (MarkSortCB.SelectedIndex == 5) examsort = examsort.Where(x => x.Mark == 1);
+            }
+            if (SearchTbx.Text != null)
+            {
+                examsort = examsort.Where(x => x.Student.Surname_Student.ToLower().Contains(SearchTbx.Text.ToLower()) || x.Subject.Name_Subject.ToLower().Contains(SearchTbx.Text.ToLower()) || x.Employee.Surname.ToLower().Contains(SearchTbx.Text.ToLower()));
+            }
+
             if (App.Role == "st")
-                ExamList.ItemsSource = App.db.Exam.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1) && x.Id_Student == App.User);
+                ExamList.ItemsSource = examsort.Where(x => x.IsDeleted != Convert.ToBoolean(1) && x.Id_Student == App.User);
             else
-            ExamList.ItemsSource = App.db.Exam.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1));
+            ExamList.ItemsSource = examsort.ToList().Where(x => x.IsDeleted != Convert.ToBoolean(1));
+
+            
         }
 
         private void RedactButt_Click(object sender, RoutedEventArgs e)
@@ -60,6 +79,21 @@ namespace UP321.Pages
         {
             var exam = new Exam();
             NavigationService.Navigate(new AddEditPageExam(exam));
+        }
+
+        private void SortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void MarkSortCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void SearchTbx_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Refresh();
         }
     }
 }
