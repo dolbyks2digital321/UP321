@@ -94,6 +94,10 @@ namespace UP321.Pages
                         IsDeleted = Convert.ToBoolean(0)
                     });
                 }
+                if (selectDegree != null) employee.Id_degree = selectDegree.Id_degree;
+                employee.Id_Lectern = selectLectern.Id_Lectern;
+                employee.Id_Position = selectPosition.Id_Position;
+                employee.Chief = selectChief.Id_Employee;
                 MessageBox.Show("Сохранено!");
                 App.db.SaveChanges();
                 NavigationService.Navigate(new EmployeeListPage());

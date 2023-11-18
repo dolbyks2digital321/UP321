@@ -31,13 +31,13 @@ namespace UP321.Pages
 
             MarkTb.MaxLength = 1;
 
-            SubjectCb.ItemsSource = App.db.Subject.ToList();
+            SubjectCb.ItemsSource = App.db.Subject.ToList().Where(x => x.IsDeleted == Convert.ToBoolean(0));
             SubjectCb.DisplayMemberPath = "Name_Subject";
 
-            StudentCb.ItemsSource = App.db.Student.ToList();
+            StudentCb.ItemsSource = App.db.Student.ToList().Where(x => x.IsDeleted == Convert.ToBoolean(0));
             StudentCb.DisplayMemberPath = "Surname_Student";
 
-            TeacherCb.ItemsSource = App.db.Employee.ToList();
+            TeacherCb.ItemsSource = App.db.Employee.ToList().Where(x => x.IsDeleted == Convert.ToBoolean(0));
             TeacherCb.DisplayMemberPath = "Surname";
 
             if (exam.Id_Exam > 0)
@@ -102,6 +102,9 @@ namespace UP321.Pages
             }
             if (!errors)
             {
+                exam.Id_Subject = selectSubject.Id_Subject;
+                exam.Id_Student = selectStudent.Id_Student;
+                exam.Id_Employee = selectTeacher.Id_Employee;
                 App.db.SaveChanges();
                 MessageBox.Show("Сохранено!");
                 NavigationService.Navigate(new ExamPage());

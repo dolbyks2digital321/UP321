@@ -5,10 +5,12 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="Button">
-            <Setter Property="Width" Value="140"></Setter>
+            <Setter Property="Width" Value="150"></Setter>
             <Setter Property="Margin" Value="10 0"></Setter>
-            <Setter Property="Height" Value="60"></Setter>
-            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="BorderBrush" Value="White"></Setter>
         </Style>
 
         <Style TargetType="TextBlock">
@@ -26,6 +28,21 @@
 
         <Style TargetType="TextBox">
             <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
         </Style>
+
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontFamily" Value="Cygre"></Setter>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Background" Value="Black"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+        
+        
     </Application.Resources>
 </Application>

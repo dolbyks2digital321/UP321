@@ -10,23 +10,51 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="187*"/>
-            <RowDefinition Height="38*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="325*"/>
+            <RowDefinition Height="76*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="StudentsListView" Grid.Row="0">
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin="5 0" VerticalAlignment="Center">
+                <TextBlock Margin="5 0">По ФИО</TextBlock>
+                <ComboBox x:Name="SortCB" Width="150" SelectionChanged="SortCB_SelectionChanged">
+                    <ComboBoxItem>По умолчанию</ComboBoxItem>
+                    <ComboBoxItem>А-Я</ComboBoxItem>
+                    <ComboBoxItem>Я-А</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5 0" VerticalAlignment="Center">
+                <TextBlock Margin="5 0">По спец</TextBlock>
+                <ComboBox x:Name="SpecSortCB" Width="200"  SelectionChanged="SpecSortCB_SelectionChanged">
+                    <ComboBoxItem>Все</ComboBoxItem>
+                    <ComboBoxItem>Прикл. Мат.</ComboBoxItem>
+                    <ComboBoxItem>Инф. Сист.</ComboBoxItem>
+                    <ComboBoxItem>Прикл. Инф.</ComboBoxItem>
+                    <ComboBoxItem>Ядер. Физ. и Техн.</ComboBoxItem>
+                    <ComboBoxItem>Бизнес-Инф.</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center" Margin="5 0">Поиск</TextBlock>
+                <TextBox x:Name="SearchTbx" TextChanged="SearchTbx_TextChanged" Width="200" Height="30"></TextBox>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView x:Name="StudentsListView" Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
                         <GridViewColumn Width="150" DisplayMemberBinding="{Binding Id_Student}" Header="ID"></GridViewColumn>
-                        <GridViewColumn Width="150" DisplayMemberBinding="{Binding Id_Spec}" Header="№ специальности"></GridViewColumn>
-                        <GridViewColumn Width="250" DisplayMemberBinding="{Binding Surname_Student}" Header="ФИО"></GridViewColumn>
+                        <GridViewColumn Width="300" DisplayMemberBinding="{Binding Specs.Direction}" Header="Специализация"></GridViewColumn>
+                        <GridViewColumn Width="300" DisplayMemberBinding="{Binding Surname_Student}" Header="ФИО"></GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-            <Button x:Name="AddButt">Добавить</Button>
-            <Button x:Name="RedactButt">Редактировать</Button>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+            <Button x:Name="AddButt" Click="AddButt_Click">Добавить</Button>
+            <Button x:Name="RedactButt" Click="RedactButt_Click">Редактировать</Button>
             <Button x:Name="DeleteButt" Click="DeleteButt_Click">Удалить</Button>
         </StackPanel>
     </Grid>

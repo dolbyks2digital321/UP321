@@ -73,5 +73,16 @@ namespace UP321.Pages
         {
             Refresh();
         }
+
+        private void AddButt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddEditSubjectPage(new Subject(), "add"));
+        }
+
+        private void RedactButt_Click(object sender, RoutedEventArgs e)
+        {
+            var subject = (Subject)SubjectList.SelectedItem;
+            NavigationService.Navigate(new AddEditSubjectPage(subject, "redact"));
+        }
     }
 }
