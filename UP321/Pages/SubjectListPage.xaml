@@ -17,7 +17,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="5 0" VerticalAlignment="Center">
                 <TextBlock Margin="5 0">По названию</TextBlock>
-                <ComboBox x:Name="SortCB" Width="130" SelectionChanged="SortCB_SelectionChanged" Background="Black" Foreground="White" BorderBrush="Black">
+                <ComboBox x:Name="SortCB" Width="130" SelectionChanged="SortCB_SelectionChanged">
                     <ComboBoxItem>По умолчанию</ComboBoxItem>
                     <ComboBoxItem>А-Я</ComboBoxItem>
                     <ComboBoxItem>Я-А</ComboBoxItem>
@@ -37,10 +37,10 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock VerticalAlignment="Center" Margin="5 0">Поиск</TextBlock>
-                <TextBox x:Name="SearchTbx" TextChanged="SearchTbx_TextChanged" Width="200" Height="30" ></TextBox>
+                <TextBox x:Name="SearchTbx" TextChanged="SearchTbx_TextChanged" Width="200" Height="30"></TextBox>
             </StackPanel>
         </StackPanel>
-        <ListView x:Name="SubjectList" Grid.Row="1" Background="Black" BorderBrush="Black" Foreground="White">
+        <ListView x:Name="SubjectList" Grid.Row="1">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>

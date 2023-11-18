@@ -56,7 +56,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="2" Margin="160,0">
             <Button x:Name="AddButt" Click="AddButt_Click">Добавить</Button>
             <Button x:Name="RedactButt" Click="RedactButt_Click">Редактировать</Button>
             <Button x:Name="DeleteButt" Click="DeleteButt_Click">Удалить</Button>

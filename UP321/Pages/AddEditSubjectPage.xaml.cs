@@ -67,12 +67,12 @@ namespace UP321.Pages
                 {
                     App.db.Subject.Add(new Subject()
                     {
-                        Id_Subject = int.Parse(IdTb.Text),
-                        Name_Subject = NameTb.Text,
-                        Cize_Subject = int.Parse(SizeTb.Text),
+                        Id_Subject = subject.Id_Subject,
+                        Cize_Subject = subject.Cize_Subject,
+                        Name_Subject = subject.Name_Subject,
                         Id_Lectern = selectLec.Id_Lectern,
                         IsDeleted = Convert.ToBoolean(0)
-                    });
+                    }) ;
                 }
                 else subject.Id_Lectern = selectLec.Id_Lectern;
                 MessageBox.Show("Сохранено!");

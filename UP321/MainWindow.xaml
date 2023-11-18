@@ -6,20 +6,19 @@
         xmlns:local="clr-namespace:UP321"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800">
-    <Grid Background="#FF2893FF">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="White" Offset="0"/>
+                <GradientStop Color="#FFFFBEED" Offset="1"/>
+                <GradientStop Color="#FEF1DFFF" Offset="0.233"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="37*"/>
             <RowDefinition Height="180*"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" x:Name="BackButt" Click="BackButt_Click">Назад</Button>
+        <Button Grid.Row="0" Height="40" x:Name="BackButt" Click="BackButt_Click">Назад</Button>
         <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame" Grid.Row="1"/>
-        <StackPanel Grid.Row="2" HorizontalAlignment="Right">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-                <Button x:Name="createQrBtn" Content="Создать QR" Width="150" Height="50" Click="Button_Click"></Button>
-            </StackPanel>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Image x:Name="imageQr" Height="200" Width="200" ></Image>
-            </StackPanel>
-        </StackPanel>
     </Grid>
 </Window>
